@@ -29,7 +29,8 @@
             <div class="content-wrapper">
                 <div class="div_center">
                     <h1 class="h2_font">catagory</h1>
-                    <form action="">
+                    <form action="{{ url('/add_catagory') }}" method="POST">
+                        @csrf
                         <input type="text" class="input_color" name="catagory" placeholder="Enetr Catagory">
                         <input type="submit" value="add cataory" class="btn btn-primary">
                     </form>

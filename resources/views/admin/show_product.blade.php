@@ -69,7 +69,7 @@
                     <a onclick="return confirm('Are You Sure to Delete This')" class="btn btn-danger" href="{{ url('/delete_product', $product->id) }}">Delete</a>
                   </td>
                   <td>
-                    <a href="">Edit</a>
+                    <a href="{{ url('/update_product', $product->id) }}" class="btn btn-success">Edit</a>
                   </td>
                 </tr>
                 @endforeach

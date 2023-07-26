@@ -3,6 +3,7 @@
    <head>
       <!-- Basic -->
       <meta charset="utf-8" />
+      <base href="/product">
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <!-- Mobile Metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -26,24 +27,45 @@
          <!-- header section strats -->
          @include('home.header')
          <!-- end header section -->
-         <!-- slider section -->
-         @include('home.slider')
-         <!-- end slider section -->
-      </div>
-      <!-- why section -->
-      @include('home.mysection')
-      <!-- end why section -->
-      
-      <!-- product section -->
-      @include('home.product')
-      <!-- end product section -->
+         
+         <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50%;margin-top: 20px">
+            <div class="box">
+               <div class="img-box" style="margin-bottom: 20px">
+                  <img src="product/{{ $product->image }}" alt="">
+               </div>
+               <div class="detail-box">
+                  <h6><b>
+                     {{ $product->title }}
+                  </b></h6>
+                  @if($product->discount_price!=null)
+                    
+                  <h6 style="color: red;">
+                    Discount Price : 
+                    ${{ $product->discount_price }}
+                  </h6>
+                  <h6 style="color: blue;  text-decoration-line: line-through;">
+                    price : 
+                    ${{ $product->price }}
+                  </h6>
+                  @else
+                  <h6 style="color: blue">
+                    price
+                    <br/>
+                    ${{ $product->price }}
+                  </h6>
+                  @endif
+                  <h6><b>Product Catagory : </b>{{ $product->catagory }}</h6>
+                  <h6><b>Product Details : </b>{{ $product->description }}</h6>
+                  <h6><b>Availability : </b>{{ $product->quantity }}</h6>
+                  <a href="" class="btn btn-primary">Add to Cart</a>
+               </div>
+            </div>
+         </div>
+         
 
-      <!-- subscribe section -->
-      @include('home.subscribe')
-      <!-- end subscribe section -->
-      <!-- client section -->
-      @include('home.client')
-      <!-- end client section -->
+      
+
+
       <!-- footer start -->
       @include('home.footer')
       <!-- footer end -->

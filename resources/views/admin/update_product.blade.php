@@ -87,7 +87,7 @@
 
                     <div class="div_design">
                         <label>Change Product Image :</label>
-                        <input  type="file" name="image" required>
+                        <input  type="file" name="image">
                     </div>
 
 

@@ -89,8 +89,18 @@ class AdminController extends Controller
         $product->discount_price=$request->dis_price;
         $product->catagory=$request->catagory;
         $product->quantity=$request->quantity;
-        $image=$request->image;
-        $imagename = time().'.'.$image->getClientOriginalExtension();
 
+        //for image 
+        $image = $request->image;
+        if($image){
+
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->image->move('product', $imagename);
+            $product->image=$imagename;
+
+        }
+
+        $product->save();
+        return redirect()->back()->with('message', 'Update Product Successfully');
     }
 }

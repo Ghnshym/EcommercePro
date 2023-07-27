@@ -34,30 +34,41 @@
                   <img src="product/{{ $product->image }}" alt="">
                </div>
                <div class="detail-box">
-                  <h6><b>
+                  <h6 class="my-2"><b>
                      {{ $product->title }}
                   </b></h6>
                   @if($product->discount_price!=null)
                     
-                  <h6 style="color: red;">
+                  <h6 class="my-2" style="color: red;">
                     Discount Price : 
                     ${{ $product->discount_price }}
                   </h6>
-                  <h6 style="color: blue;  text-decoration-line: line-through;">
+                  <h6 class="my-2" style="color: blue;  text-decoration-line: line-through;">
                     price : 
                     ${{ $product->price }}
                   </h6>
                   @else
-                  <h6 style="color: blue">
+                  <h6 class="my-2" style="color: blue">
                     price
                     <br/>
                     ${{ $product->price }}
                   </h6>
                   @endif
-                  <h6><b>Product Catagory : </b>{{ $product->catagory }}</h6>
-                  <h6><b>Product Details : </b>{{ $product->description }}</h6>
-                  <h6><b>Availability : </b>{{ $product->quantity }}</h6>
-                  <a href="" class="btn btn-primary">Add to Cart</a>
+                  <h6 class="my-2"><b>Product Catagory : </b>{{ $product->catagory }}</h6>
+                  <h6 class="my-2"><b>Product Details : </b>{{ $product->description }}</h6>
+                  <h6 class="my-2"><b>Availability : </b>{{ $product->quantity }}</h6>
+
+                  <form action="{{ url('/add_cart', $product->id) }}" method="POST">
+                     @csrf
+                     <div class="row">
+                        <div class="col-md-4">
+                           <input type="number" name="quantity" min="1" value="1" class="option2">   
+                        </div> 
+                        <div class="col-md-4">
+                           <input type="submit" value="Add To Cart" class="option2" >   
+                        </div>   
+                     </div>   
+                  </form>
                </div>
             </div>
          </div>

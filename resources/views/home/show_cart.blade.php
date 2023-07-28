@@ -86,7 +86,7 @@
             <div class="conatiner text-center mt-8">
                 <h1 style="font-size: 25px;margin-bottom:10px">Place to Order </h1>
                 <a href="{{ url('/cash_order',$totalproduct) }}" class="btn btn-danger">Cash On Delivery</a>
-                <a href="" class="btn btn-danger">Pay Using Card</a>
+                <a href="{{ url('/stripe', $totalprice) }}" class="btn btn-danger">Pay Using Card</a>
             </div>
             
          </div>

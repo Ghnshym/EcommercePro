@@ -11,6 +11,8 @@ use App\Models\Cart;
 use App\Models\order;
 use Session;
 use Stripe;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class HomeController extends Controller
 {
@@ -169,25 +171,29 @@ class HomeController extends Controller
 
     }
 
-    public function stripe($totalprice){
-
-        return view('home.stripe', compact('totalprice'));
+    public function stripe($totalPrice): View
+    {
+        return view('home.stripe', compact('totalPrice'));
     }
-
-    public function stripePost(Request $request)
+      
+    /**
+     * success response method.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function stripePost(Request $request, $totalPrice): RedirectResponse
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-    
+      
         Stripe\Charge::create ([
-                "amount" => 100 * 100,
+                "amount" => $totalPrice * 100,
                 "currency" => "usd",
                 "source" => $request->stripeToken,
-                "description" => "Thanks for payment " 
+                "description" => "Test payment using card." 
         ]);
-      
-        Session::flash('success', 'Payment successful!');
-              
-        return back();
+                
+        return back()
+                ->with('success', 'Payment successful!');
     }
 
 

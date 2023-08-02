@@ -59,7 +59,7 @@
                     <th>Action</th>
                 </tr>
 
-                <?php $totalprice = 0; ?>
+                <?php $totalPrice = 0; ?>
                 <?php $totalproduct=0;  ?>
                 @foreach($cart as $cart)
                     
@@ -74,19 +74,19 @@
                     <a onclick="return confirm('Are You Sure To Remove This Product ?')" href="{{ url('/remove_cart', $cart->id) }}" class="btn btn-danger">Remove</a>
                 </td>
                 </tr>
-                <?php $totalprice = $totalprice + $cart->price; ?>
+                <?php $totalPrice = $totalPrice + $cart->price; ?>
                 <?php $totalproduct++; ?>
                 @endforeach
 
             </table>
             <div class="container text-center">
-                <h1 class="total_price">Your Total Price : ${{ $totalprice }}</h1>
+                <h1 class="total_price">Your Total Price : ${{ $totalPrice }}</h1>
             </div>
 
             <div class="conatiner text-center mt-8">
                 <h1 style="font-size: 25px;margin-bottom:10px">Place to Order </h1>
                 <a href="{{ url('/cash_order',$totalproduct) }}" class="btn btn-danger">Cash On Delivery</a>
-                <a href="{{ url('/stripe', $totalprice) }}" class="btn btn-danger">Pay Using Card</a>
+                <a href="{{ url('/stripe',$totalPrice) }}" class="btn btn-danger">Pay Using Card</a>
             </div>
             
          </div>

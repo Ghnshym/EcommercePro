@@ -9,9 +9,9 @@
       
 <div class="container">
       
-    <h1>stripe payment using card</h1>
+    <h1 class="text-center m-4">stripe payment using card</h1>
       
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default credit-card-box">
                 <div class="panel-heading display-table" >

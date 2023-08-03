@@ -79,12 +79,22 @@
           </ul>
         </div>
       </li>
+
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{ url('view_catagory') }}">
           <span class="menu-icon">
             <i class="mdi mdi-playlist-play"></i>
           </span>
           <span class="menu-title">category</span>
+        </a>
+      </li>
+
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="{{ url('order') }}">
+          <span class="menu-icon">
+            <i class="mdi mdi-cart"></i>
+          </span>
+          <span class="menu-title">order</span>
         </a>
       </li>
       

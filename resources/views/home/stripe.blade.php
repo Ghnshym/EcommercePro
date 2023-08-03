@@ -4,12 +4,24 @@
     <title>stripe payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <base href="/public">
+    <link rel="shortcut icon" href="home/images/favicon.png" type="">
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
+    <!-- font awesome style -->
+    <link href="home/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="home/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="home/css/responsive.css" rel="stylesheet" />
 </head>
 <body>
+
+   <span style="font-size: 18px;">@include('home.header')</span>
       
-<div class="container">
+<div class="container-fluid">
       
-    <h1 class="text-center m-4">stripe payment using card</h1>
+    <h1 class="text-center m-4" style="font-size: 18px;font-weight:500;">stripe payment using card</h1>
       
     <div class="row mt-3">
         <div class="col-md-6 col-md-offset-3">
@@ -35,7 +47,7 @@
                             id='pay-btn'
                             class="btn btn-success mt-3"
                             type="button"
-                            style="margin-top: 20px; width: 100%;padding: 7px;"
+                            style="margin-top: 20px; width: 100%;padding: 7px;color:black; font-size: 12px;font-weight: bold"
                             onclick="createToken()">PAY ${{ $totalPrice }}
                         </button>
                     <form>
@@ -79,5 +91,13 @@
         });
     }
 </script>
+<!-- jQery -->
+      <script src="home/js/jquery-3.4.1.min.js"></script>
+      <!-- popper js -->
+      <script src="home/js/popper.min.js"></script>
+      <!-- bootstrap js -->
+      <script src="home/js/bootstrap.js"></script>
+      <!-- custom js -->
+      <script src="home/js/custom.js"></script>
  
 </html>

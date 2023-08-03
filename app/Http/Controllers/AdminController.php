@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catagory;
 use App\Models\Product;
+use App\Models\order;
 
 class AdminController extends Controller
 {
@@ -102,5 +103,22 @@ class AdminController extends Controller
 
         $product->save();
         return redirect()->back()->with('message', 'Update Product Successfully');
+    }
+
+    public function order(){
+
+        $order = order::all();
+        return view('admin.order', compact('order'));
+    }
+
+    public function delivered($id){
+
+        $order = order::find($id);
+        $order->delivery_status = 'delivered';
+        $order->payment_status = 'paid';
+
+        $order->save();
+
+        return redirect()->back();
     }
 }

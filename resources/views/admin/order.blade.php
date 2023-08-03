@@ -37,6 +37,7 @@
                         <th>payment status</th>
                         <th>Delivery status</th>
                         <th>Delivered</th>
+                        <th>Invoice</th>
                     </tr>
                     @foreach ($order as $order )    
                     <tr style="color: white">
@@ -48,7 +49,7 @@
                         <td>{{ $order->quantity }}</td>
                         <td>{{ $order->price }}</td>
                         <td>
-                            <img src="/product/{{ $order->image }}" alt="" style="width: 120px;height:100px;border-radius:unset">
+                            <img src="/product/{{ $order->image }}" alt="" style="width: 180px;height:100px;border-radius:unset">
                         </td>
                         <td>{{ $order->payment_status }}</td>
                         <td>{{ $order->delivery_status }}</td>
@@ -56,8 +57,11 @@
                             @if($order->delivery_status == 'processing')
                                  <a onclick="return confirm('Are You Sure To Delivery is Confirmed')" href="{{ url('delivered', $order->id) }}" class="btn btn-danger">Deli- <br> vered</a>
                             @else
-                                <p>Delivered</p>
+                                <p style="color: green;">Delivered</p>
                             @endif
+                        </td>
+                        <td>
+                            <a href="{{ url('order_pdf', $order->id) }}"  class="btn btn-danger">Download</a>
                         </td>
                         
                     </tr>

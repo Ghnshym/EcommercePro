@@ -8,17 +8,15 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
+->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('dashboard'); 
     })->name('dashboard');
 });
 
-Route::get('/redirect', [HomeController::class, 'redirect']);
+Route::get('/redirect', [HomeController::class, 'redirect'])
+->middleware('auth', 'verified');
 
 Route::get('/view_catagory', [AdminController::class, 'view_catagory']);
 
@@ -40,6 +38,7 @@ Route::post('/update_product_confirm/{id}', [AdminController::class, 'update_pro
 
 Route::get('/order', [AdminController::class, 'order']);
 Route::get('/delivered/{id}', [AdminController::class, 'delivered']);
+Route::get('/order_pdf/{id}', [AdminController::class, 'order_pdf']);
 
 
 

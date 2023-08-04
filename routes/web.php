@@ -62,3 +62,6 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/stripe/{totalPrice}', 'stripe');
     Route::post('/stripe/{totalprice}', 'stripePost')->name('stripe.post');
 });
+
+Route::get('/user_order', [HomeController::class, 'user_order']);
+Route::get('/cancel_order/{id}', [HomeController::class, 'cancel_order']);

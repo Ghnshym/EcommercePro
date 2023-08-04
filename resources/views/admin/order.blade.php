@@ -8,6 +8,16 @@
         font-size: 25px;
         text-align: center;
         font-weight: bold;
+        padding: 5px;
+        margin: 10px;
+    }
+    .form_deg{
+        font-size: 25px;
+        text-align: center;
+        font-weight: bold;
+        padding: 5px;
+        margin: 10px;
+        color: black;
     }
     
    </style>
@@ -23,6 +33,15 @@
             <div class="content-wrapper">
 
                 <h1 class="title_deg">All Orders</h1>
+                <div class="form_deg">
+                    <form action="{{ url('search') }}" method="get">
+                        @csrf
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="search for something">
+
+                        <input type="submit" value="search" class="btn btn-outline-primary">
+                    </form>
+                </div>
+                
                 <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr class="bg-success text-danger">
@@ -40,7 +59,7 @@
                         <th>Invoice</th>
                         <th>Send Email</th>
                     </tr>
-                    @foreach ($order as $order )    
+                    @forelse ($order as $order )    
                     <tr style="color: white">
                         <td>{{ $order->name }}</td>
                         <td>{{ $order->email }}</td>
@@ -70,7 +89,11 @@
                         </td>
                         
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="13" style="font-size: 18px; font-wight: bold; text-align:center; color:white;">No data Found</td>
+                    </tr>
+                    @endforelse
                 </table>
                 </div>
             </div>

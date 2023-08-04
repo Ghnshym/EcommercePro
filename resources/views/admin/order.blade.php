@@ -29,15 +29,16 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Address</th>
+                        <th>Customer Address</th>
                         <th>Product Title</th>
                         <th>Quantity</th>
                         <th>price</th>
-                        <th>image</th>
+                        <th>Product image</th>
                         <th>payment status</th>
                         <th>Delivery status</th>
                         <th>Delivered</th>
                         <th>Invoice</th>
+                        <th>Send Email</th>
                     </tr>
                     @foreach ($order as $order )    
                     <tr style="color: white">
@@ -55,13 +56,17 @@
                         <td>{{ $order->delivery_status }}</td>
                         <td>
                             @if($order->delivery_status == 'processing')
-                                 <a onclick="return confirm('Are You Sure To Delivery is Confirmed')" href="{{ url('delivered', $order->id) }}" class="btn btn-danger">Deli- <br> vered</a>
+                                 <a onclick="return confirm('Are You Sure To Delivery is Confirmed')" href="{{ url('delivered', $order->id) }}" class="btn btn-danger">Delivered</a>
                             @else
                                 <p style="color: green;">Delivered</p>
                             @endif
                         </td>
                         <td>
-                            <a href="{{ url('order_pdf', $order->id) }}"  class="btn btn-danger">Download</a>
+                            <a href="{{ url('order_pdf', $order->id) }}"  class="btn btn-success">Download</a>
+                        </td>
+
+                        <td>
+                            <a href="{{ url('send_email', $order->id) }}" class="btn btn-info">email</a>
                         </td>
                         
                     </tr>

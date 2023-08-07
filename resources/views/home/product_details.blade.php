@@ -21,6 +21,19 @@
       <link href="home/css/style.css" rel="stylesheet" />
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
+      <style>
+         .replies-container {
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+}
+
+.reply-branch {
+    border: none;
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+}
+
+      </style>
    </head>
    <body>
       <div class="hero_area">
@@ -72,61 +85,80 @@
                </div>
             </div>
          </div>
-
-         
-
-
-
-         <!-- Display product details here -->
-<div class="container">
-<!-- Container to display comments -->
-<div class="comments-container">
-   <!-- Loop through comments -->
-   @foreach ($product->comments as $comment)
-       <!-- Comment container -->
-       <div class="comment-container">
-           <!-- Display comment content -->
-           <p>{{ $comment->content }}</p>
-
-           <!-- Reply button to show/hide reply form -->
-           <button class="btn btn-secondary btn-sm reply-btn" data-comment-id="{{ $comment->id }}">Reply</button>
-
-           <!-- Reply form -->
-           <div class="reply-form" style="display: none;">
-               <form action="{{ route('reply.store', ['commentId' => $comment->id]) }}" method="post">
-                   @csrf
-                   <input type="text" name="content" placeholder="Enter your reply">
-                   <button type="submit" class="btn btn-primary btn-sm">Submit Reply</button>
-               </form>
-           </div>
-
-           <!-- Display replies for each comment -->
-           @foreach ($comment->replies as $reply)
-               <!-- Reply content -->
-               <div class="reply-container">
-                   <p>{{ $reply->content }}</p>
-               </div>
-           @endforeach
-       </div>
-   @endforeach
-
-   <!-- Form to add a new comment -->
-   <div class="comment-form">
-      <form action="{{ route('comment.store', ['productId' => $product->id]) }}" method="post">
-         @csrf
-         <input type="text" name="content" placeholder="Enter your comment">
-         <button type="submit" class="btn btn-primary">Submit Comment</button>
-     </form>
-     
-   </div>
-</div>
-
       </div>
-
-
-
+      
 
       
+
+     
+
+
+     <div class="container">
+      <h2>Add Comment :</h2>
+      <!-- Form to add a new comment -->
+      <div class="comment-form">
+          <form action="{{ route('comment.store', ['productId' => $product->id]) }}" method="post">
+              @csrf
+              <input type="text" name="content" placeholder="Enter your comment">
+              <button type="submit" class="btn btn-primary">Submit Comment</button>
+          </form>
+      </div>
+  </div>
+  
+  <div class="container">
+      <h2>All Comments</h2>
+      <!-- Container to display comments -->
+      <div class="row">
+          @foreach ($product->comments as $comment)
+              <!-- Comment container -->
+              <div class="col-8 mx-auto mb-4">
+                  <div class="card">
+                      <div class="card-body">
+                          <!-- Display user name for the comment -->
+                          <h5 class="card-title">{{ $comment->name }} ( Date : {{ $comment->created_at->format('d/m/y') }} ) </h5>
+                          <!-- Display comment content -->
+                          <p class="card-text">{{ $comment->content }}</p>
+  
+                          <!-- Display replies for each comment -->
+                          <div class="replies-container">
+                              @foreach ($comment->replies as $reply)
+                                  <!-- Reply content with indentation and timestamp -->
+                                  <div class="card mt-3 reply-branch">
+                                      <!-- Display user name and formatted date for the reply -->
+                                      <h6 class="card-title">{{ $reply->name }} ( Date : {{ $reply->created_at->format('d/m/y') }} ) </h6>
+                                      <!-- Display reply content -->
+                                      <p class="card-text">{{ $reply->content }}</p>
+                                  </div>
+                              @endforeach
+  
+                              <!-- Reply form -->
+                              <div class="reply-form mt-2" style="display: none;">
+                                  <form action="{{ route('reply.store', ['commentId' => $comment->id]) }}" method="post">
+                                      @csrf
+                                      <input type="text" name="content" placeholder="Enter your reply" required>
+                                      <button type="submit" class="btn btn-primary btn-sm">Submit Reply</button>
+                                  </form>
+                              </div>
+                          </div>
+  
+                          <!-- Reply button to show/hide reply form -->
+                          <button class="btn btn-secondary btn-sm reply-btn mt-3">Reply</button>
+  
+                      </div>
+                  </div>
+              </div>
+          @endforeach
+      </div>
+  </div>
+  
+     
+     
+     
+     
+     
+     
+
+
 
 
       <!-- footer start -->
@@ -152,22 +184,22 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get all reply buttons
-        const replyButtons = document.querySelectorAll('.reply-btn');
+   document.addEventListener('DOMContentLoaded', function() {
+       // Get all reply buttons
+       const replyButtons = document.querySelectorAll('.reply-btn');
 
-        // Attach click event listener to each reply button
-        replyButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Get the comment container associated with the clicked reply button
-                const commentContainer = this.closest('.comment-container');
+       // Attach click event listener to each reply button
+       replyButtons.forEach(button => {
+           button.addEventListener('click', function() {
+               // Get the replies container associated with the clicked reply button
+               const repliesContainer = this.parentElement.querySelector('.replies-container');
 
-                // Toggle the reply form visibility
-                const replyForm = commentContainer.querySelector('.reply-form');
-                replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
-            });
-        });
-    });
+               // Toggle the reply form visibility
+               const replyForm = repliesContainer.querySelector('.reply-form');
+               replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+           });
+       });
+   });
 </script>
 
    </body>

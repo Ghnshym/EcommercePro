@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -15,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('comment_id');
             $table->text('content');
+            $table->string('name');
             $table->timestamps();
 
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');

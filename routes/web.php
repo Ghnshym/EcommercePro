@@ -71,3 +71,5 @@ Route::get('/cancel_order/{id}', [HomeController::class, 'cancel_order']);
 Route::post('/product/{productId}/comment', [CommentController::class, 'store'])->name('comment.store');
 
 Route::post('/comment/{commentId}/reply', [ReplyController::class, 'store'])->name('reply.store');
+
+Route::get('/product_details/{productId}', [CommentController::class, 'showProduct'])->name('product.show');

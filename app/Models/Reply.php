@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
 
-class Product extends Model
+class Reply extends Model
 {
     use HasFactory;
 
-    public function comments()
+    public function comment()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Comment::class);
     }
 }

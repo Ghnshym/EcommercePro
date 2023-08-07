@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ReplyController;
 
 
 
@@ -65,3 +67,7 @@ Route::controller(HomeController::class)->group(function(){
 
 Route::get('/user_order', [HomeController::class, 'user_order']);
 Route::get('/cancel_order/{id}', [HomeController::class, 'cancel_order']);
+
+Route::post('/product/{productId}/comment', [CommentController::class, 'store'])->name('comment.store');
+
+Route::post('/comment/{commentId}/reply', [ReplyController::class, 'store'])->name('reply.store');

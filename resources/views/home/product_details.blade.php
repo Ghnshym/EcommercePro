@@ -86,13 +86,9 @@
             </div>
          </div>
       </div>
+
+      {{-- Comments part start here --}}
       
-
-      
-
-     
-
-
      <div class="container">
       <h2>Add Comment :</h2>
       <!-- Form to add a new comment -->
@@ -110,23 +106,17 @@
       <!-- Container to display comments -->
       <div class="row">
           @foreach ($product->comments as $comment)
-              <!-- Comment container -->
               <div class="col-8 mx-auto mb-4">
                   <div class="card">
                       <div class="card-body">
-                          <!-- Display user name for the comment -->
                           <h5 class="card-title">{{ $comment->name }} ( Date : {{ $comment->created_at->format('d/m/y') }} ) </h5>
-                          <!-- Display comment content -->
                           <p class="card-text">{{ $comment->content }}</p>
   
                           <!-- Display replies for each comment -->
                           <div class="replies-container">
                               @foreach ($comment->replies as $reply)
-                                  <!-- Reply content with indentation and timestamp -->
                                   <div class="card mt-3 reply-branch">
-                                      <!-- Display user name and formatted date for the reply -->
                                       <h6 class="card-title">{{ $reply->name }} ( Date : {{ $reply->created_at->format('d/m/y') }} ) </h6>
-                                      <!-- Display reply content -->
                                       <p class="card-text">{{ $reply->content }}</p>
                                   </div>
                               @endforeach
@@ -150,16 +140,8 @@
           @endforeach
       </div>
   </div>
-  
-     
-     
-     
-     
-     
-     
 
-
-
+  {{-- comments part end here --}}
 
       <!-- footer start -->
       @include('home.footer')

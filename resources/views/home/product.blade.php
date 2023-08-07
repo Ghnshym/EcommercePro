@@ -1,10 +1,26 @@
-<section class="product_section layout_padding">
+<section class="product_section layout_padding" id="ourProducts">
     <div class="container">
        <div class="heading_container heading_center">
           <h2>
              Our <span>products</span>
           </h2>
        </div>
+       <div class="container">
+         <form action="{{ url('product_search') }}#ourProducts" method="GET">
+             @csrf
+             <div class="d-flex justify-content-center">
+                 <input type="text" name="search" placeholder="Search Product" style="width: 900px;" class="form-control" value="{{ request('search') }}">
+             </div>
+             <input type="submit" class="btn btn-success mt-3 d-block mx-auto" value="Search Product">
+         </form>
+     </div>
+
+     @if(isset($noResultsMessage))
+     <div class="alert alert-info mt-3" role="alert">
+       {{ $noResultsMessage }}
+     </div>
+   @else
+     
        <div class="row">
 
          @foreach($products as $product)
@@ -61,6 +77,9 @@
           </div>
          @endforeach
          {!! $products->withQueryString()->links('pagination::bootstrap-5') !!}
+
+        
        
     </div>
+    @endif
  </section>

@@ -291,6 +291,25 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function product_search(Request $request){
+
+        $searchdata = $request->search;
+
+        $products = Product::where('title', 'LIKE', "%$searchdata%")
+        ->orWhere('catagory', 'LIKE', "%$searchdata%")
+        ->paginate(9);
+
+        if ($products->isEmpty()) {
+
+            $noResultsMessage = 'No results found for "' . $searchdata . '".';
+            return view('home.userpage', compact('noResultsMessage'));
+        } else {
+            
+            return view('home.userpage', compact('products'));
+        }
+    }
     
 
 

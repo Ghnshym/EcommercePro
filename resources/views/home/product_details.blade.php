@@ -99,7 +99,7 @@
       <div class="comment-form">
           <form action="{{ route('comment.store', ['productId' => $product->id]) }}" method="post">
               @csrf
-              <input type="text" name="content" placeholder="Enter your comment">
+              <input type="text" name="content" placeholder="Enter your comment" required>
               <button type="submit" class="btn btn-primary">Submit Comment</button>
           </form>
       </div>

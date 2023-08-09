@@ -4,12 +4,12 @@
           <div class="col-md-4">
               <div class="full">
                  <div class="logo_footer">
-                   <a href="#"><img width="210" src="images/logo.png" alt="#" /></a>
+                   <a href="#"><img width="210" src="/images/logo.jpg" alt="#" /></a>
                  </div>
                  <div class="information_f">
-                   <p><strong>ADDRESS:</strong> 28 White tower, Street Name New York City, USA</p>
-                   <p><strong>TELEPHONE:</strong> +91 987 654 3210</p>
-                   <p><strong>EMAIL:</strong> yourmain@gmail.com</p>
+                   <p><strong>ADDRESS:</strong> Phase 5, sector-73, SAS Nagar, Mohali (Chandigarh)</p>
+                   <p><strong>TELEPHONE:</strong> +91 912 850 9864</p>
+                   <p><strong>EMAIL:</strong> bca1902113@@gmail.com</p>
                  </div>
               </div>
           </div>

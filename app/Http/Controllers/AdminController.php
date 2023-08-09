@@ -10,39 +10,78 @@ use App\Models\Product;
 use App\Models\order;
 use Notification;
 use PDF;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminController extends Controller
 {
     public function view_catagory(){
 
-        $data = catagory::all();
-        return view('admin.catagory', compact('data'));
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+            $data = catagory::all();
+            return view('admin.catagory', compact('data'));
+        }
+        else
+        {
+            return redirect('login');
+        }
+        
     }
 
     public function add_catagory(Request $request){
 
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
         $data = new Catagory();
         $data->catagory_name=$request->catagory;
 
         $data->save();
 
         return redirect()->back()->with('message', 'catagory added successfully');
+
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
     public function delete_catagory($id){
+
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
         $data = catagory::find($id);
         $data->delete();
         return redirect()->back()->with('message', 'catagory deleted successfully');
+
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
     public function view_product(){
 
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+
         $catagory = catagory::all();
         return view('admin.product', compact('catagory'));
+
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
+
     public function add_product(Request $request){
+
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
 
         $product= new product;
         $product->title=$request->title;
@@ -60,31 +99,68 @@ class AdminController extends Controller
 
         $product->save();
         return redirect()->back()->with('message', 'Product added successfully');
+
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
     public function show_product(){
 
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+
         $product=product::all();
         return view('admin.show_product', compact('product'));
+
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
     public function delete_product($id){
+
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
 
         $product = product::find($id);
         $product->delete();
 
         return redirect()->back()->with('message', 'Product deleted successfully');
+
+        }
+        else
+        {
+            return redirect('login');
+
+        }
     }
 
     public function update_product($id){
+
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
 
         $product = product::find($id);
         $catagory = catagory::all();
 
         return view('admin.update_product', compact('product', 'catagory'));
+
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
     public function update_product_confirm(Request $request, $id){
+
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
 
         $product = product::find($id);
 
@@ -107,15 +183,34 @@ class AdminController extends Controller
 
         $product->save();
         return redirect()->back()->with('message', 'Update Product Successfully');
+
+        }
+        else{
+            return redirect('login');
+            
+        }
     }
 
     public function order(){
 
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+
         $order = order::all();
         return view('admin.order', compact('order'));
+
+        }
+        else
+        {
+            return redirect('login');
+
+        }
     }
 
     public function delivered($id){
+
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
 
         $order = order::find($id);
         $order->delivery_status = 'delivered';
@@ -124,22 +219,48 @@ class AdminController extends Controller
         $order->save();
 
         return redirect()->back();
+
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
     public function order_pdf($id){
         
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+
         $order = order::find($id);
         $pdf = PDF::loadView('admin.pdf', compact('order'));
         return $pdf->download('order_details.pdf');
+
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
     public function send_email($id){
 
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
+
         $order = order::find($id);
         return view('admin.email_info', compact('order'));
+        }
+        else{
+            return redirect('login');
+
+        }
     }
 
     public function send_user_email(Request $request, $id){
+
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
 
         $order = order::find($id);
 
@@ -156,10 +277,19 @@ class AdminController extends Controller
         Notification::send($order, new SendEmailNotification($details));
 
         return redirect()->back()->with('message', 'Email send');
+        }
+        else
+        {
+            return redirect('login');
+            
+        }
 
     }
 
     public function search_data(Request $request){
+
+        if(Auth::id() && (Auth::User()->usertype == 1))
+        {
 
         $searchText = $request->search;
         // dd($order);
@@ -169,6 +299,12 @@ class AdminController extends Controller
         ->get();
 
         return view('admin.order', compact('order'));
+        
+        }
+        else{
+            return redirect('login');
+        }
+
     }
 
 }

@@ -11,6 +11,9 @@ class ReplyController extends Controller
 {
     public function store(Request $request, $commentId)
     {   
+        if(Auth::id())
+        {
+
         $user = Auth::User();
         $username = $user->name;
         $comment = Comment::findOrFail($commentId);
@@ -20,6 +23,13 @@ class ReplyController extends Controller
         $comment->replies()->save($reply);
 
         return redirect()->back()->with('success', 'Reply posted successfully.');
+        
+        }
+        else
+        {
+            return redirect('login');
+        }
+
     }
 }
 

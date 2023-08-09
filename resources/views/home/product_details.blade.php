@@ -3,7 +3,6 @@
    <head>
       <!-- Basic -->
       <meta charset="utf-8" />
-      <base href="/product">
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <!-- Mobile Metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -12,7 +11,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="{{ asset('home/images/favicon.png') }}" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <title>E-Comm</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="{{ asset('home/css/bootstrap.css') }}" />
       <!-- font awesome style -->
@@ -44,7 +43,7 @@
          <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50%;margin-top: 20px">
             <div class="box">
                <div class="img-box" style="margin-bottom: 20px">
-                  <img src="product/{{ $product->image }}" alt="">
+                  <img src="/product/{{ $product->image }}" alt="">
                </div>
                <div class="detail-box">
                   <h6 class="my-2"><b>

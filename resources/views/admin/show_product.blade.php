@@ -14,7 +14,7 @@
     .font_size{
       text-align: center;
       font-size: 40px;
-      padding-top: 20px;
+      padding-top: 5px;
     }
     .th_color{
       background-color: skyblue;
@@ -41,8 +41,8 @@
 
               <h2 class="font_size">All Products</h2>
 
-              <table class="center">
-                <tr class="th_color">
+              <table class="w-100 text-center" style="border: 1px solid white;">
+                <tr class="th_color" style="border: 1px solid white;">
                   <th class="th_deg">Product Title</th>
                   <th class="th_deg">Description</th>
                   <th class="th_deg">Quantity</th>
@@ -55,7 +55,7 @@
                 </tr>
 
                 @foreach($product as $product)
-                <tr>
+                <tr style="border: 1px solid white;">
                   <td>{{ $product->title }}</td>
                   <td>{{ $product->description }}</td>
                   <td>{{ $product->quantity }}</td>

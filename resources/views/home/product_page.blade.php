@@ -1,12 +1,14 @@
 <section class="product_section layout_padding" id="ourProducts">
     <div class="container">
-       <div class="heading_container heading_center">
-          <h2>
-             Our <span>products</span>
-          </h2>
-       </div>
+      @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" area-hidden="true">X</button>
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+
        <div class="container">
-         <form action="{{ url('product_search') }}#ourProducts" method="GET">
+         <form action="{{ url('/search_product') }}#ourProducts" method="GET">
              @csrf
              <div class="d-flex justify-content-center">
                  <input type="text" name="search" placeholder="Search Product" style="width: 900px;" class="form-control" value="{{ request('search') }}">
@@ -14,13 +16,6 @@
              <input type="submit" class="btn btn-success mt-3 d-block mx-auto" value="Search Product">
          </form>
      </div>
-
-     @if(session()->has('message'))
-                    <div class="alert alert-success">
-                        <button type="button" class="close" data-dismiss="alert" area-hidden="true">X</button>
-                        {{ session()->get('message') }}
-                    </div>
-                @endif
 
      @if(isset($noResultsMessage))
      <div class="alert alert-info mt-3" role="alert">
@@ -39,7 +34,7 @@
                       <a href="{{ url('/product_details',$product->id) }}" class="option1">
                       Product Details
                       </a>
-                      <form action="{{ url('/add_cart', $product->id) }}#ourProducts" method="POST">
+                      <form action="{{ url('/add_cart', $product->id) }}" method="POST">
                         @csrf
                         <div class="row">
                            <div class="col-md-4">

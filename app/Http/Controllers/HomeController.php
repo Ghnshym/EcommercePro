@@ -53,7 +53,7 @@ class HomeController extends Controller
     public function product_details($id){
 
         $product=product::find($id);
-        return view('home.product_details',compact('product'));
+        return view('home.product_details',compact('product'))->with('message', 'product Added successfully');
     }
 
     public function add_cart(Request $request, $id){
@@ -61,9 +61,33 @@ class HomeController extends Controller
         if(Auth::id())
         {
             $user= Auth::user();
+            $userid = $user->id;
             $product=product::find($id);
 
-            $cart = new cart();
+            $product_exist_id = cart::where('product_id', '=',$id)->where('user_id', '=',$userid)->get('id')->first();
+
+            if($product_exist_id)
+            {
+
+                $cart = cart::find($product_exist_id)->first();
+                $quantity = $cart->quantity;
+                $cart->quantity = $quantity + $request->quantity;
+
+                if($product->discount_price!=null){
+
+                    $cart->price=$product->discount_price * $cart->quantity;
+               }
+               else{
+   
+                   $cart->price=$product->price * $cart->quantity;
+               }
+                
+                $cart->save();
+                return redirect()->back()->with('message', 'Product Added Successfully');
+            }
+            else{
+
+                $cart = new cart();
 
             $cart->user_id=$user->id;
             $cart->name=$user->name;
@@ -87,7 +111,9 @@ class HomeController extends Controller
             $cart->quantity=$request->quantity;
 
             $cart->save();
-            return redirect()->back();
+            return redirect()->back()->with('message', 'Product Added Successfully');
+            }
+            
             
         }
         else
@@ -308,6 +334,31 @@ class HomeController extends Controller
         } else {
             
             return view('home.userpage', compact('products'));
+        }
+    }
+
+    public function products(){
+
+        $products = Product::paginate(9);
+
+        return view('home.all_products', compact('products'))->with('message', 'Product has been successfully Added to cart');
+    }
+
+    public function search_product(Request $request){
+
+        $searchdata = $request->search;
+
+        $products = Product::where('title', 'LIKE', "%$searchdata%")
+        ->orWhere('catagory', 'LIKE', "%$searchdata%")
+        ->paginate(9);
+
+        if ($products->isEmpty()) {
+
+            $noResultsMessage = 'No results found for "' . $searchdata . '".';
+            return view('home.all_products', compact('noResultsMessage'));
+        } else {
+            
+            return view('home.all_products', compact('products'));
         }
     }
     

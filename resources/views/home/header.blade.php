@@ -19,11 +19,6 @@
                <li class="nav-item">
                   <a class="nav-link" href="{{ url('/user_order') }}">Order</a>
                </li>
-                  <li>
-                     <a href="{{ url('/redirect') }}#ourProducts">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                     </a>
-                  </li>
 
                   @if(Route::has('login'))
                   @auth

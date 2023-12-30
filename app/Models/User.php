@@ -10,8 +10,13 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable //implements MustVerifyEmail
 {
+
+    //for email veryfication with link must before login to main screen than 
+    // uncomment /implements MustVerifyEmail this from top 
+    //after that go to config/fortify.php and uncomment this line  //Features::emailVerification(),
+    
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;

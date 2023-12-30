@@ -43,7 +43,7 @@
          <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50%;margin-top: 20px">
             <div class="box">
                <div class="img-box" style="margin-bottom: 20px">
-                  <img src="/product/{{ $product->image }}" alt="">
+                  <img src="/product/{{ $product->image }}" alt="" style="width:400px; height:250px !important;">
                </div>
                <div class="detail-box">
                   <h6 class="my-2"><b>
